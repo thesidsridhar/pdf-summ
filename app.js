@@ -7,7 +7,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 // Set OpenAI API Key
-openai.apiKey = "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";
+openai.apiKey = "YOUR_API_KEY";
 
 // Initialize app
 const app = express();
