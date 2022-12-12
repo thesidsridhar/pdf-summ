@@ -3,3 +3,35 @@
   <input type="file" name="pdf" accept=".pdf">
   <button type="submit">Generate Summary</button>
 </form>
+
+<div id="summary"></div>
+
+<script>
+  // Handle form submission
+  document.querySelector("form").addEventListener("submit", (event) => {
+    // Prevent default form submission behavior
+    event.preventDefault();
+
+    // Get the uploaded file
+    const file = document.querySelector("input[type=file]").files[0];
+
+    // Create a FormData object to send the file in the request
+    const formData = new FormData();
+    formData.append("pdf", file);
+
+    // Make an AJAX request to the /upload route
+    fetch("/upload", {
+      method: "POST",
+      body: formData,
+    })
+    .then((response) => response.text())
+    .then((summary) => {
+      // Update the summary in the page
+      document.querySelector("#summary").innerHTML = summary;
+    })
+    .catch((error) => {
+      // Handle error
+      alert(error.message);
+    });
+  });
+</script>
