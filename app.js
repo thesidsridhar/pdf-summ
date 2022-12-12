@@ -16,11 +16,19 @@ app.use(fileUpload());
 // Set up routing
 app.get("/", (req, res) => {
   res.send(`
-    <h1>PDF Summary Generator</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="pdf" accept=".pdf">
-      <button type="submit">Generate Summary</button>
-    </form>
+  <h1>PDF Summary Generator</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="pdf" accept=".pdf">
+    <button type="submit" disabled>Generate Summary</button>
+  </form>
+  
+  <script>
+    // Handle file selection
+    document.querySelector("input[type=file]").addEventListener("change", (event) => {
+      // Enable the submit button if a file is selected
+      document.querySelector("button").disabled = !event.target.files.length;
+    });
+  </script>  
   `);
 });
 
